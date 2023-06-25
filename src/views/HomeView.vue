@@ -47,18 +47,20 @@ export default {
   },
   mounted() {
     this.getLatestProducts()
+    document.title='Home | Djackets'
   },
   methods: {
-    getLatestProducts() {
-      axios
-      .get('latest-product')
-      .then(response => {
-        this.latestproducts = response.data
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
+    async getLatestProducts() {
+      this.$store.commit('setIsLoading',true)
+      await axios
+        .get('latest-product')
+        .then(response => {
+          this.latestproducts = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      this.$store.commit('setIsLoading',false)
     }
   }
 }

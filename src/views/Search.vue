@@ -3,10 +3,10 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">Search</h1>
-                <h2 class="is-size-5 has-text-gray">Search term : {{ quary }}</h2>
+                <h2 class="is-size-5 has-text-gray">Search term : {{ query }}</h2>
             </div>
             <ProductBox
-                v-for="product in latestproducts"
+                v-for="product in products"
                 v-bind:key="product.id"
                 v-bind:product="product"
                 />
@@ -25,7 +25,7 @@ export default {
     data() {
         return {
             products:[],
-            quary:''
+            query:''
         }
     },
     mounted() {
@@ -34,8 +34,8 @@ export default {
         let url=window.location.search.substring(1)
         let params=new URLSearchParams(url)
 
-        if (params.get('quary')){
-            this.quary=params.get('query')
+        if (params.get('query')){
+            this.query=params.get('query')
             this.performSearh()
         }
     },
